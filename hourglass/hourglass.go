@@ -5,14 +5,14 @@ import "time"
 // The Hourglass is the tool we use to measure time lapse
 type Hourglass struct {
 	creationTime time.Time
-	d            time.Duration
+	capacity     time.Duration
 	running      bool
 }
 
 // NewHourglass creates an hourglass of a given capacity (duration)
 func NewHourglass(d time.Duration) *Hourglass {
 	return &Hourglass{
-		d: d,
+		capacity: d,
 	}
 }
 
@@ -41,8 +41,8 @@ func (h *Hourglass) elapsedTime() time.Duration {
 
 // Countdown returns the remaining time
 func (h *Hourglass) Countdown() time.Duration {
-	if h.isRunning() && h.elapsedTime() < h.d {
-		return h.d - h.elapsedTime() + time.Second
+	if h.isRunning() && h.elapsedTime() < h.capacity {
+		return h.capacity - h.elapsedTime() + time.Second
 	}
 	return 0 * time.Second
 }
@@ -50,7 +50,7 @@ func (h *Hourglass) Countdown() time.Duration {
 // Expired returns whether the hourglass time capacity was totally consumed or not
 func (h *Hourglass) Expired() bool {
 	if h.isRunning() {
-		return h.elapsedTime() >= h.d
+		return h.elapsedTime() >= h.capacity
 	}
 	return false
 }
