@@ -41,8 +41,8 @@ func (h *Hourglass) elapsedTime() time.Duration {
 
 // Countdown returns the remaining time
 func (h *Hourglass) Countdown() time.Duration {
-	if h.isRunning() {
-		return h.d - h.elapsedTime()
+	if h.isRunning() && h.elapsedTime() < h.d {
+		return h.d - h.elapsedTime() + time.Second
 	}
 	return 0 * time.Second
 }

@@ -67,7 +67,7 @@ func (m Model) View() string {
 
 	s := "\U0001f345 Chillku Timer\n"
 	s += fmt.Sprintf("%s \n\n", m.spinner.View())
-	s += fmt.Sprint((time.Second + m.hg.Countdown()).Truncate(time.Second).String())
+	s += fmt.Sprint(m.hg.Countdown().Truncate(time.Second).String())
 	s += "\n\n  press q to Quit\n"
 	return s
 }
