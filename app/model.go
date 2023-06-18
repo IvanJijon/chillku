@@ -69,7 +69,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	}
 }
 
-// View is the app's View method
+// View renders the app's UI
 func (m Model) View() string {
 	s := m.ui.Header.View()
 	s += fmt.Sprintf("\n%s\n", m.spinner.View())
