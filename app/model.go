@@ -10,14 +10,15 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-type model struct {
+// Model is the main application model
+type Model struct {
 	spinner spinner.Model
 	hg      *hourglass.Hourglass
 }
 
-func InitialModel() model {
-	// fmt.Println("model created, hourglass created")
-	return model{spinner: initSpinner(), hg: hourglass.NewHourglass(5 * time.Second)}
+// InitialModel instantiates model at its starting state when launching the app
+func InitialModel() Model {
+	return Model{spinner: initSpinner(), hg: hourglass.NewHourglass(5 * time.Second)}
 }
 
 func initSpinner() spinner.Model {
@@ -35,11 +36,13 @@ func initSpinner() spinner.Model {
 	return s
 }
 
-func (m model) Init() tea.Cmd {
+// Init is the app's Init method
+func (m Model) Init() tea.Cmd {
 	return nil
 }
 
-func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+// Update is the app's Update method
+func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.String() {
@@ -59,11 +62,12 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	}
 }
 
-func (m model) View() string {
+// View is the app's View method
+func (m Model) View() string {
 
 	s := "Header\n"
 	s += fmt.Sprintf("%s \n\n", m.spinner.View())
-	s += fmt.Sprint((time.Second + m.hg.CountDown()).Truncate(time.Second).String())
+	s += fmt.Sprint((time.Second + m.hg.Countdown()).Truncate(time.Second).String())
 	s += "\n\n  press q to Quit\n"
 	return s
 }
