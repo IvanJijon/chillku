@@ -1,12 +1,12 @@
 package ui
 
-type UI struct {
+type ChillkuUI struct {
 	Header    *Header
 	Countdown *Countdown
 }
 
-func NewUI() UI {
-	return UI{
+func NewChillkuUI() ChillkuUI {
+	return ChillkuUI{
 		Header:    InitHeader(),
 		Countdown: InitCountdown(),
 	}
